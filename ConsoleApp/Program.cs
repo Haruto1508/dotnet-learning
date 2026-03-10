@@ -1,17 +1,21 @@
-var builder = WebApplication.CreateBuilder(args);
+using System;
 
-// Add services
-builder.Services.AddControllers();
+class Program
+{
+    static void Main()
+    {
+        AuthController authController = new AuthController();
 
-var app = builder.Build();
+        Console.WriteLine("SafeVault Login");
 
-// Middleware pipeline
-app.UseMiddleware<LoggingMiddleware>();   // middleware của bạn
+        Console.Write("Username: ");
+        string username = Console.ReadLine();
 
-app.UseHttpsRedirection();
+        Console.Write("Password: ");
+        string password = Console.ReadLine();
 
-app.UseAuthorization();
+        string result = authController.Login(username, password);
 
-app.MapControllers();
-
-app.Run();
+        Console.WriteLine(result);
+    }
+}
